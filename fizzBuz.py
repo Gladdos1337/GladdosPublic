@@ -1,3 +1,6 @@
+#2 Player game of FizzBuzz
+#Big thanks to Shunnez!
+
 import sys
 
 player_active = True
@@ -62,3 +65,5 @@ while loop_counter < 20:  # Main game loop
         #     winner_announcer(loop_counter)
         loop_counter += 1
     player_active = True
+
+#TODO: Refactor the living hell out of this
