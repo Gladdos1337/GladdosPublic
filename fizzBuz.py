@@ -34,7 +34,7 @@ def input_check(player_input, loop_counter):
     else:
         return False
 
-while loop_counter < 20:  # Main game loop
+while loop_counter < 20:
     if player_active:
         try:
             p1_input = input("Enter your number player 1: ")
@@ -45,10 +45,7 @@ while loop_counter < 20:  # Main game loop
         except ValueError:
             if input_check(p1_input, loop_counter) == False:
                 winner_announcer(loop_counter)
-        # if input_check(p1_input, loop_counter) == False:
-        #     winner_announcer(loop_counter)
         loop_counter += 1
-        # continue loop and pass to player 2
         if loop_counter >= 20:
             player_active = False
             break
@@ -61,8 +58,6 @@ while loop_counter < 20:  # Main game loop
         except ValueError:
             if input_check(p2_input, loop_counter) == False:
                 winner_announcer(loop_counter)
-        # if input_check(p2_input, loop_counter) == False:
-        #     winner_announcer(loop_counter)
         loop_counter += 1
     player_active = True
 
