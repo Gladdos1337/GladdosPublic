@@ -5,11 +5,11 @@ loop_counter = 1
 
 def winner_announcer(loop_counter):
     if loop_counter % 2 == 0:
-        print("Player 1 wins!!!") #Cant use return because of sys.exit
+        print("Player 1 wins!!!")
 
         sys.exit(0)
     else:
-        print("Player 2 wins!!!") #Cant use return because of sys.exit
+        print("Player 2 wins!!!")
         sys.exit(0)
 
 def fizzbuzz_compiler(step):
@@ -25,9 +25,9 @@ def fizzbuzz_compiler(step):
 
 def input_check(player_input, loop_counter):
     """Takes in player_input and checks it against fizzbuzz compiler"""
-    if player_input == fizzbuzz_compiler(loop_counter): # if 1 = 1(1) ??? ## Issue is that the p1_input is still a STR instead of being an INT.
+    if player_input == fizzbuzz_compiler(loop_counter):
         loop_counter += 1
-        return loop_counter  # had to change it from return to if
+        return loop_counter
     else:
         return False
 
@@ -41,7 +41,7 @@ while loop_counter < 6:  # Main game loop
             winner_announcer(loop_counter)
             # If player input is not equal to this it should break and call the winner
             continue
-        if input_check(p1_input, loop_counter) == False: # This can be improved (According to PyCharm)
+        if input_check(p1_input, loop_counter) == False:  #This can be improved (According to PyCharm)
             winner_announcer(loop_counter)
             # Run end game function and declare winner
         else:
