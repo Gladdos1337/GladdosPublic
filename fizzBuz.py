@@ -31,23 +31,21 @@ def input_check(player_input, loop_counter):
     else:
         return False
 
-while loop_counter < 6:  # Main game loop
-    if player_active == True:
+while loop_counter < 10:  # Main game loop
+    if player_active:
         try:
             p1_input = input("Enter your number player 1: ")
             if p1_input == str(p1_input):
                 p1_input = int(p1_input)
         except ValueError:
-            winner_announcer(loop_counter)
+            if input_check(p1_input, loop_counter) == False:  # This can be improved (According to PyCharm)
+                winner_announcer(loop_counter)
             # If player input is not equal to this it should break and call the winner
-            continue
-        if input_check(p1_input, loop_counter) == False:  #This can be improved (According to PyCharm)
-            winner_announcer(loop_counter)
             # Run end game function and declare winner
         else:
             loop_counter += 1
         # continue loop and pass to player 2
-        if loop_counter >= 6:
+        if loop_counter >= 10:
             player_active = False
             break
         try:
@@ -55,9 +53,8 @@ while loop_counter < 6:  # Main game loop
             if p2_input == str(p2_input):
                 p2_input = int(p2_input)
         except ValueError:
-            continue
-        if input_check(p2_input, loop_counter) == False:
-            winner_announcer(loop_counter)
+            if input_check(p2_input, loop_counter) == False:
+                winner_announcer(loop_counter)
         else:
             loop_counter += 1
     player_active = True
