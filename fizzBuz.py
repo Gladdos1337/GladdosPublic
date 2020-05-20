@@ -5,12 +5,11 @@ loop_counter = 1
 
 def winner_announcer(loop_counter):
     if loop_counter % 2 == 0:
-        print("Player 2 wins!!!") #Cant use return because of sys.exit
+        print("Player 1 wins!!!") #Cant use return because of sys.exit
 
         sys.exit(0)
     else:
-        print("Player 1 wins!!!") #Cant use return because of sys.exit
-
+        print("Player 2 wins!!!") #Cant use return because of sys.exit
         sys.exit(0)
 
     # if it ends on 1 player 1 loses
@@ -51,9 +50,9 @@ while loop_counter < 6:  # Main game loop
             p1_input = input("Enter your number player 1: ")
             if p1_input == str(p1_input):
                 p1_input = int(p1_input)
-            else:
-                continue
         except ValueError:
+            winner_announcer(loop_counter)
+            # If player input is not equal to this it should break and call the winner
             continue
         if input_check(p1_input, loop_counter) == False: # This can be improved (According to PyCharm)
             winner_announcer(loop_counter)
@@ -66,10 +65,8 @@ while loop_counter < 6:  # Main game loop
             break
         try:
             p2_input = input("Enter your number player 2: ")
-            if p1_input == str(p1_input):
-                p1_input = int(p1_input)
-            else:
-                continue
+            if p2_input == str(p2_input):
+                p2_input = int(p2_input)
         except ValueError:
             continue
         if input_check(p2_input, loop_counter) == False:
