@@ -40,10 +40,8 @@ while loop_counter < 10:  # Main game loop
         except ValueError:
             if input_check(p1_input, loop_counter) == False:
                 winner_announcer(loop_counter)
-            else:
-                loop_counter += 1
-        if input_check(p1_input, loop_counter) == False:
-            winner_announcer(loop_counter)
+        # if input_check(p1_input, loop_counter) == False:
+        #     winner_announcer(loop_counter)
         loop_counter += 1
         # continue loop and pass to player 2
         if loop_counter >= 10:
@@ -56,9 +54,7 @@ while loop_counter < 10:  # Main game loop
         except ValueError:
             if input_check(p2_input, loop_counter) == False:
                 winner_announcer(loop_counter)
-            else:
-                loop_counter += 1
-        if input_check(p2_input, loop_counter) == False:
-            winner_announcer(loop_counter)
+        # if input_check(p2_input, loop_counter) == False:
+        #     winner_announcer(loop_counter)
         loop_counter += 1
     player_active = True
