@@ -1,4 +1,4 @@
-import sys
+#import sys
 
 player_active = True
 loop_counter = 1
@@ -7,10 +7,10 @@ def winner_announcer(loop_counter):
     if loop_counter % 2 == 0:
         print("Player 1 wins!!!")
 
-        sys.exit(0)
+        #sys.exit(0)
     else:
         print("Player 2 wins!!!")
-        sys.exit(0)
+        #sys.exit(0)
 
 def fizzbuzz_compiler(step):
     """compiles latest expected result of fizzbuzz"""
@@ -42,6 +42,8 @@ while loop_counter < 10:  # Main game loop
                 winner_announcer(loop_counter)
             else:
                 loop_counter += 1
+        if input_check(p1_input, loop_counter) == False:
+            winner_announcer(loop_counter)
         loop_counter += 1
         # continue loop and pass to player 2
         if loop_counter >= 10:
@@ -56,5 +58,7 @@ while loop_counter < 10:  # Main game loop
                 winner_announcer(loop_counter)
             else:
                 loop_counter += 1
+        if input_check(p2_input, loop_counter) == False:
+            winner_announcer(loop_counter)
         loop_counter += 1
     player_active = True
