@@ -37,6 +37,8 @@ while loop_counter < 10:  # Main game loop
             p1_input = input("Enter your number player 1: ")
             if p1_input == str(p1_input):
                 p1_input = int(p1_input)
+                if input_check(p1_input, loop_counter) == False:
+                    winner_announcer(loop_counter)
         except ValueError:
             if input_check(p1_input, loop_counter) == False:
                 winner_announcer(loop_counter)
@@ -51,6 +53,8 @@ while loop_counter < 10:  # Main game loop
             p2_input = input("Enter your number player 2: ")
             if p2_input == str(p2_input):
                 p2_input = int(p2_input)
+                if input_check(p2_input, loop_counter) == False:
+                    winner_announcer(loop_counter)
         except ValueError:
             if input_check(p2_input, loop_counter) == False:
                 winner_announcer(loop_counter)
