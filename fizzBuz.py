@@ -38,12 +38,11 @@ while loop_counter < 10:  # Main game loop
             if p1_input == str(p1_input):
                 p1_input = int(p1_input)
         except ValueError:
-            if input_check(p1_input, loop_counter) == False:  # This can be improved (According to PyCharm)
+            if input_check(p1_input, loop_counter) == False:
                 winner_announcer(loop_counter)
-            # If player input is not equal to this it should break and call the winner
-            # Run end game function and declare winner
-        else:
-            loop_counter += 1
+            else:
+                loop_counter += 1
+        loop_counter += 1
         # continue loop and pass to player 2
         if loop_counter >= 10:
             player_active = False
@@ -55,6 +54,7 @@ while loop_counter < 10:  # Main game loop
         except ValueError:
             if input_check(p2_input, loop_counter) == False:
                 winner_announcer(loop_counter)
-        else:
-            loop_counter += 1
+            else:
+                loop_counter += 1
+        loop_counter += 1
     player_active = True
