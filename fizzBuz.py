@@ -5,11 +5,11 @@ loop_counter = 1
 
 def winner_announcer(loop_counter):
     if loop_counter % 2 == 0:
-        print("Player 1 wins!!!") #Cant use return because of sys.exit
+        print("Player 2 wins!!!") #Cant use return because of sys.exit
 
         sys.exit(0)
     else:
-        print("Player 2 wins!!!") #Cant use return because of sys.exit
+        print("Player 1 wins!!!") #Cant use return because of sys.exit
 
         sys.exit(0)
 
@@ -18,6 +18,11 @@ def winner_announcer(loop_counter):
 
     #The winner_announcer() is using the % of loop_counter info to decide who's the winner.
 
+    #Yeah we'll use a trick to handle the string or int input. I'm not sure if you have used it yet.
+    # We use try: to convert code to int. If code is not a number that will raise an Exception ValueError.
+    # We use except: to catch this error and have code for handling strings inside of it
+    #[8:43 PM]
+    #Let me know when you're done
 
 def fizzbuzz_compiler(step):
     """compiles latest expected result of fizzbuzz"""
@@ -42,7 +47,14 @@ def input_check(player_input, loop_counter):
 
 while loop_counter < 6:  # Main game loop
     if player_active == True:
-        p1_input = input("Enter your number player 1: ")
+        try:
+            p1_input = input("Enter your number player 1: ")
+            if p1_input == str(p1_input):
+                p1_input = int(p1_input)
+            else:
+                continue
+        except ValueError:
+            continue
         if input_check(p1_input, loop_counter) == False: # This can be improved (According to PyCharm)
             winner_announcer(loop_counter)
             # Run end game function and declare winner
@@ -52,7 +64,14 @@ while loop_counter < 6:  # Main game loop
         if loop_counter >= 6:  # Loop catcher or whatever ## Find a way to improve this
             player_active = False
             break
-        p2_input = input("Enter your number player 2: ")
+        try:
+            p2_input = input("Enter your number player 2: ")
+            if p1_input == str(p1_input):
+                p1_input = int(p1_input)
+            else:
+                continue
+        except ValueError:
+            continue
         if input_check(p2_input, loop_counter) == False:
             winner_announcer(loop_counter)
         else:
