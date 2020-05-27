@@ -1,10 +1,18 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import random
+class Deck():
+    def __init__(self):
+        self.cards = [2,3,4,5,6,7,8,9,10,10,10,10,11] * 4
 
-np.random.seed(19680801)
-data = np.random.randn(2, 100)
+    def deck_shuffle(self):
+        return random.shuffle(self.cards)
 
-fig, axs = plt.subplots(0, 0, figsize=(5, 5))
-axs[1, 1].hist2d(data[0], data[1])
+    def pop(self, index=-1):
+        return self.cards.pop(index)
 
-plt.show()
+
+deck = Deck()
+deck.deck_shuffle()
+player_hand = []
+player_hand.append(deck.pop())
+player_hand.append(deck.pop())
+print((player_hand))
