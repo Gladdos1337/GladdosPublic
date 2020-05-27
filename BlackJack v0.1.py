@@ -70,7 +70,7 @@ dealer_hand.append(deck.pop())
 player_balance = 1500 
 player_name = "Nameless One"
 
-#Game begins
+#GAME BEGINS
 while sum(player_hand) < 21:
     bet = print(f"Welcome, {player_name}, your total balance is: {betting(player_balance)} ") ## BALANCE DOESNT KEEP UP IT RESETS, BUT CARDS DON'T ***HIGH PRIO***
     print(f"Dealer: {dealer_hand},[?] ")
@@ -92,7 +92,7 @@ while sum(player_hand) < 21:
     else:
         print("you losts lol")
 
-# # # GAME LOGIC # # #
+# # # CORE GAME LOGIC # # #
 #  if sum(player_hand) == 21:
 #         winner_player()
 #     elif sum(dealer_hand) == 21:
