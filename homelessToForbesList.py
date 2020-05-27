@@ -1,8 +1,10 @@
-def fibonacci():
-    a, b = 0, 1
-    while True:
-        yield a
-        a, b = b, a + b
+import matplotlib.pyplot as plt
+import numpy as np
 
-    return a
-print(fibonacci())
+np.random.seed(19680801)
+data = np.random.randn(2, 100)
+
+fig, axs = plt.subplots(0, 0, figsize=(5, 5))
+axs[1, 1].hist2d(data[0], data[1])
+
+plt.show()
