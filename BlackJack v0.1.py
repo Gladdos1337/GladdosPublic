@@ -5,12 +5,11 @@ import random
 #TODO: LINE 82
 
 """MEDIUM PRIO"""
-#TODO: Use JSON for balance (or mySQL if you hate yourself)
+#TODO: Make function that gives access whenever game needs to change player's total balance (after winning or losing)
 #TODO: LINE 66
 
 """LOW PRIO"""
-#TODO: Make function that gives access whenever game needs to change player's total balance (after winning or losing)
-
+#TODO: Use JSON for balance (or mySQL if you hate yourself)
 
 class Deck():
     def __init__(self):
