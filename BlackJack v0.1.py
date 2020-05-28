@@ -79,18 +79,32 @@ while sum(player_hand) < 21:
     dealer_hand.append(deck.pop())
     print(f"Dealer: {dealer_hand} [{sum(dealer_hand)}]")
     print(f"Player: {player_hand} [{sum(player_hand)}]")
-    if sum(player_hand) > sum(dealer_hand): # Implement proper logic on whos winning when (IF player=21 double etc.) 
-        print("play wins lol")
-        cont = input("Play again (y/n): ")
-        if cont[0].lower() == "y":
+    #WINNING LOGIC
+    if sum(player_hand) < sum(dealer_hand): # Implement proper logic on whos winning when (IF player=21 double etc.) 
+        print("House wins.")
+    elif sum(player_hand) > sum(dealer_hand):
+        if sum(dealer_hand) > 17:
+            while sum(dealer_hand) > 21:
+                dealer_hand.append(deck.pop())
+                if sum(dealer_hand) > sum(player_hand):
+                    break
+        again = input("Play again (y/n): ")
+        if again[0].lower() == 'y':
+            player_hand = []
+            dealer_hand = []
+            player_hand.append(deck.pop()) # Find a way to multiply without typing it twice
+            player_hand.append(deck.pop())
+            dealer_hand.append(deck.pop())
             continue
-        elif cont[0].lower() == 'n':
+        elif again[0].lower() == 'n':
             break
         else:
-            print("cba now")
+            print("idk")
             break
-    else:
-        print("you losts lol")
+    
+
+
+        
 
 # # # CORE GAME LOGIC # # #
 #  if sum(player_hand) == 21:
