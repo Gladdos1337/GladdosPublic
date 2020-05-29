@@ -1,12 +1,10 @@
-import random
+import random, sys
 
 """HIGH PRIO"""
-#TODO: LINE 75
-#TODO: LINE 82
+#TODO: Make function that gives access whenever game needs to change player's total balance (after winning or losing)
 
 """MEDIUM PRIO"""
-#TODO: Make function that gives access whenever game needs to change player's total balance (after winning or losing)
-#TODO: LINE 66
+#TODO: Refactor the code
 
 """LOW PRIO"""
 #TODO: Use JSON for balance (or mySQL if you hate yourself)
@@ -51,14 +49,15 @@ def hit(player_hand, dealer_hand):
             print("cba now")
             break
     return player_hand, dealer_hand
-    
 
-
-def winner_dealer():
-    print("dealer win")
-def winner_player():
-    print("player win")
-        
+def stand(dealer_hand, player_balance):
+    while True:
+        if sum(dealer_hand) <= 17:
+            dealer_hand.append(deck.pop())
+        elif sum(dealer_hand) > 21:
+            print("Dealer Bust, player wins!")
+            player_balance = bet
+            return f"Dealer: {dealer_hand} [{sum(dealer_hand)}]"
 
 deck = Deck()
 deck.deck_shuffle()
@@ -69,47 +68,59 @@ player_hand.append(deck.pop())
 dealer_hand.append(deck.pop())
 player_balance = 1500 
 player_name = "Nameless One"
-
+game_active = True
 #GAME BEGINS
-while sum(player_hand) < 21:
-    bet = print(f"Welcome, {player_name}, your total balance is: {betting(player_balance)} ") ## BALANCE DOESNT KEEP UP IT RESETS, BUT CARDS DON'T ***HIGH PRIO***
-    print(f"Dealer: {dealer_hand},[?] ")
-    print(f"Player: {player_hand} [{sum(player_hand)}]")
-    hit(player_hand, dealer_hand)
-    dealer_hand.append(deck.pop())
-    print(f"Dealer: {dealer_hand} [{sum(dealer_hand)}]")
-    print(f"Player: {player_hand} [{sum(player_hand)}]")
-    #WINNING LOGIC
-    if sum(player_hand) < sum(dealer_hand): # Implement proper logic on whos winning when (IF player=21 double etc.) 
-        print("House wins.")
-    elif sum(player_hand) > sum(dealer_hand):
-        if sum(dealer_hand) > 17:
-            while sum(dealer_hand) > 21:
-                dealer_hand.append(deck.pop())
-                if sum(dealer_hand) > sum(player_hand):
-                    break
-        again = input("Play again (y/n): ")
-        if again[0].lower() == 'y':
-            player_hand = []
-            dealer_hand = []
-            player_hand.append(deck.pop()) # Find a way to multiply without typing it twice
-            player_hand.append(deck.pop())
-            dealer_hand.append(deck.pop())
-            continue
-        elif again[0].lower() == 'n':
-            break
-        else:
-            print("idk")
-            break
-    
+while True:
+    while game_active == True:
+        bet = print(f"Welcome, {player_name}, your total balance is: {betting(player_balance)} ") ## BALANCE DOESNT KEEP UP IT RESETS, BUT CARDS DON'T ***HIGH PRIO***
+        print(f"Dealer: {dealer_hand},[?] ")
+        print(f"Player: {player_hand} [{sum(player_hand)}]")
+        while True:
+            hit_or_stand = input("Do you want to hit or stand (h/s): ")
+            if hit_or_stand[0] == 'h':
+                hit(player_hand, dealer_hand)
+                break
+            elif hit_or_stand[0] == 's':
+                stand(dealer_hand)
+                break
+            else:
+                print("Wrong input")
+        dealer_hand.append(deck.pop())
+        print(f"Dealer: {dealer_hand} [{sum(dealer_hand)}]")
+        print(f"Player: {player_hand} [{sum(player_hand)}]")
+        if sum(player_hand) == 21 and sum(dealer_hand) != 21: # If player gets blackjack
+            print("BlackJack!")
+            game_active = False
+        #WINNING LOGIC
+        if sum(player_hand) < sum(dealer_hand): # Implement proper logic on whos winning when (IF player=21 double etc.) 
+            print("House wins.")
+            game_active = False
+        elif sum(player_hand) > sum(dealer_hand):
+            if sum(dealer_hand) < 17 and sum(dealer_hand) > sum(player_hand):
+                while sum(dealer_hand) > 21:
+                    dealer_hand.append(deck.pop())
+                    if sum(dealer_hand) > sum(player_hand):
+                        print(f"Dealer: {dealer_hand} [{sum(dealer_hand)}]")
+                        print(f"Player: {player_hand} [{sum(player_hand)}]")
+                        print("House wins.")
+                        game_active = False
+            else:
+                print("Player wins!")
+                player_balance += bet*2
+                game_active = False
 
-
-        
-
-# # # CORE GAME LOGIC # # #
-#  if sum(player_hand) == 21:
-#         winner_player()
-#     elif sum(dealer_hand) == 21:
-#         winner_dealer()
-#     elif sum(player_hand) < 22 and sum(player_hand) > sum(dealer_hand):
-#         winner_player()
+    #In the first while loop:
+                    
+    again = input("Play again (y/n): ")
+    if again[0].lower() == 'y':
+        player_hand = []
+        dealer_hand = []
+        player_hand.append(deck.pop()) # Find a way to multiply without typing it twice
+        player_hand.append(deck.pop())
+        dealer_hand.append(deck.pop())
+        game_active = True
+    elif again[0].lower() == 'n':
+        break
+    else:
+        print("idk")
+        break
