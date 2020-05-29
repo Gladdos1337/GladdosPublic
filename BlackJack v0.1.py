@@ -38,6 +38,9 @@ def hit(player_hand, dealer_hand):
         again = input("Do you want to hit (y/n): ")
         if again[0].lower() == "y":
             player_hand.append(deck.pop())
+            if sum(player_hand) == 21:
+                print("Player Blackjack in hit function")
+                break
             if sum(player_hand) > 21:
                 print("BUST")
                 break
@@ -50,14 +53,19 @@ def hit(player_hand, dealer_hand):
             break
     return player_hand, dealer_hand
 
-def stand(dealer_hand, player_balance):
+def append_dealer_hand(dealer_hand,player_hand):
     while True:
-        if sum(dealer_hand) <= 17:
+        if sum(dealer_hand) < 17:
             dealer_hand.append(deck.pop())
-        elif sum(dealer_hand) > 21:
-            print("Dealer Bust, player wins!")
-            player_balance = bet
-            return f"Dealer: {dealer_hand} [{sum(dealer_hand)}]"
+            if sum(dealer_hand) > sum(player_hand):
+                print("dealer wins")
+                return dealer_hand,player_hand
+            if sum(dealer_hand) > 21:
+                print("Dealer Bust, player wins!")
+                return dealer_hand,player_hand
+        else:
+            break
+
 
 deck = Deck()
 deck.deck_shuffle()
@@ -70,6 +78,7 @@ player_balance = 1500
 player_name = "Nameless One"
 game_active = True
 #GAME BEGINS
+
 while True:
     while game_active == True:
         bet = print(f"Welcome, {player_name}, your total balance is: {betting(player_balance)} ") ## BALANCE DOESNT KEEP UP IT RESETS, BUT CARDS DON'T ***HIGH PRIO***
@@ -77,23 +86,31 @@ while True:
         print(f"Player: {player_hand} [{sum(player_hand)}]")
         while True:
             hit_or_stand = input("Do you want to hit or stand (h/s): ")
-            if hit_or_stand[0] == 'h':
+            if hit_or_stand[0] == 'h': # HIT
                 hit(player_hand, dealer_hand)
+                dealer_hand.append(deck.pop())
+                if sum(player_hand) > 21:
+                    print("player loses")
+                    print(f"Dealer: {dealer_hand} [{sum(dealer_hand)}]")
+                    print(f"Player: {player_hand} [{sum(player_hand)}]")
+                    game_active = False
+                else:
+                        print("stuck @ 97")
+                        break
+            elif hit_or_stand[0] == 's': # STAND
+                append_dealer_hand(dealer_hand,player_hand)
                 break
-            elif hit_or_stand[0] == 's':
-                stand(dealer_hand)
-                break
-            else:
-                print("Wrong input")
-        dealer_hand.append(deck.pop())
         print(f"Dealer: {dealer_hand} [{sum(dealer_hand)}]")
         print(f"Player: {player_hand} [{sum(player_hand)}]")
         if sum(player_hand) == 21 and sum(dealer_hand) != 21: # If player gets blackjack
             print("BlackJack!")
             game_active = False
+        if sum(player_hand) == 21 and sum(dealer_hand) == 21:
+            print("It do be even tho")
+            game_active = False
         #WINNING LOGIC
         if sum(player_hand) < sum(dealer_hand): # Implement proper logic on whos winning when (IF player=21 double etc.) 
-            print("House wins.")
+            print("House wins. 111")
             game_active = False
         elif sum(player_hand) > sum(dealer_hand):
             if sum(dealer_hand) < 17 and sum(dealer_hand) > sum(player_hand):
@@ -106,7 +123,6 @@ while True:
                         game_active = False
             else:
                 print("Player wins!")
-                player_balance += bet*2
                 game_active = False
 
     #In the first while loop:
