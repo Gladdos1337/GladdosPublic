@@ -9,6 +9,9 @@ import random, sys
 """LOW PRIO"""
 #TODO: Use JSON for balance (or mySQL if you hate yourself)
 
+
+# @@ TODO FIRST:  Get b alance working >>> <<<
+
 class Deck():
     def __init__(self):
         self.cards = [2,3,4,5,6,7,8,9,10,10,10,10,11] * 4
@@ -71,15 +74,6 @@ def blackJack(player_hand, dealer_hand):
         print("ADD 2x betting win later on.")
         game_active = False
 
-# def lose(player_hand, dealer_hand):  ## UNUSED FOR NOW
-#     if sum(player_hand) > 21: 
-#         print("player loses from a fucntion")
-#         game_active = False
-#     if sum(dealer_hand) > 21:
-#         print("dealeer loses from a fucntion")
-#         game_active = False
-
-
 deck = Deck()
 deck.deck_shuffle()
 player_hand = []
@@ -90,7 +84,6 @@ dealer_hand.append(deck.pop())
 player_balance = 1500 
 player_name = "Nameless One"
 game_active = True
-
 
 #GAME BEGINS
 
@@ -112,7 +105,6 @@ while True:
                     game_active = False
                     break
                 else:
-                        # i have no fucking idea why it got stucked here
                         print("stuck @ 97")
                         break
             elif hit_or_stand[0] == 's': # STAND
@@ -128,7 +120,7 @@ while True:
             break
         #WINNING LOGIC
         if sum(player_hand) > 21:
-            print("Player bust, House wins. 131")
+            print("Player bust, House wins.")
             break
         if sum(dealer_hand) > 21:
             print("Dealer bust, player wins.")
